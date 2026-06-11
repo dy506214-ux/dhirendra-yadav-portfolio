@@ -26,11 +26,9 @@ export function TypingAnimation({
   const child = {
     visible: {
       opacity: 1,
-      display: "inline-block",
     },
     hidden: {
       opacity: 0,
-      display: "none",
     },
   };
 
