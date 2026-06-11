@@ -16,6 +16,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Alok Yadav | Full Stack Developer & Startup Builder",
   description: "I build scalable web applications, intelligent software systems, and real-world digital products that solve meaningful problems.",
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  }
 };
 
 export default function RootLayout({
