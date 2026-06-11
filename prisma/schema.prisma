@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  email    String @unique
+  password String
+  name     String
+}
+
+model ProfileInfo {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  titles       String[]
+  bio          String
+  resumeLink   String?
+  githubUrl    String?
+  linkedinUrl  String?
+  twitterUrl   String?
+  emailAddress String?
+  heroImage    String?
+}
+
+model Stat {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  label String
+  value String
+  icon  String?
+}
+
+model Service {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  iconName    String?
+}
+
+model FocusArea {
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  link  String?
+}
+
+model TechSkill {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  category String?
+  iconName String?
+}
+
+model Project {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  title            String
+  description      String
+  detailedOverview String?
+  keyFeatures      String[]
+  imageUrl         String?
+  techStack        String[]
+  liveLink         String?
+  githubLink       String?
+  featured         Boolean  @default(false)
+}
+
+model Experience {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  role        String
+  company     String
+  startDate   String
+  endDate     String?
+  description String
+  current     Boolean  @default(false)
+}
+
+model BlogPost {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  slug        String   @unique
+  content     String
+  coverImage  String?
+  publishedAt DateTime @default(now())
+  isPublished Boolean  @default(true)
+}
+
+model Achievement {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  date        String
+  issuer      String?
+  link        String?
+}
+
+model Education {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  degree      String
+  institution String
+  startDate   String
+  endDate     String?
+  description String?
+  grade       String?
+}
