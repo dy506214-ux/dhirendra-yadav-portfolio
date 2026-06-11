@@ -3,52 +3,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { revalidatePath } from "next/cache";
-import bcrypt from "bcryptjs";
+import { addAdmin, changePassword, deleteAdmin } from "./actions";
 
 export default async function AdminSettingsPage() {
   const admins = await prisma.admin.findMany({ select: { id: true, email: true, name: true } });
-
-  async function addAdmin(formData: FormData) {
-    "use server";
-    const name = formData.get("name") as string;
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    if (!name || !email || !password) return;
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await prisma.admin.create({
-      data: { name, email, password: hashedPassword }
-    });
-    
-    revalidatePath("/admin/settings");
-  }
-
-  async function changePassword(formData: FormData) {
-    "use server";
-    const email = formData.get("email") as string;
-    const newPassword = formData.get("newPassword") as string;
-
-    if (!email || !newPassword) return;
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-
-    await prisma.admin.update({
-      where: { email },
-      data: { password: hashedPassword }
-    });
-    
-    revalidatePath("/admin/settings");
-  }
-
-  async function deleteAdmin(formData: FormData) {
-    "use server";
-    const id = formData.get("id") as string;
-    await prisma.admin.delete({ where: { id } });
-    revalidatePath("/admin/settings");
-  }
 
   return (
     <div className="max-w-6xl space-y-8">
