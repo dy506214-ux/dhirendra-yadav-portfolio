@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alok Yadav - Full Stack Developer Portfolio
 
-## Getting Started
+Welcome to the open-source repository of my personal portfolio website. This project is a modern, high-performance web application designed to showcase my skills, projects, and professional journey as a Full Stack Developer and Tech Associate.
 
-First, run the development server:
+![Portfolio Screenshot](./public/portfolio-screenshot.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌟 Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Modern UI/UX**: Designed with a sleek, dark-themed glassmorphic aesthetic.
+- **Dynamic Animations**: Powered by Framer Motion, featuring smooth scroll reveals, custom typing effects, and hover transitions.
+- **Full-Stack Architecture**: Built on Next.js 15+ (App Router) with Server-Side Rendering (SSR) for optimal SEO and performance.
+- **Database Driven**: Uses Prisma ORM and MongoDB to dynamically render projects, experiences, and deep project detail pages.
+- **Admin Dashboard**: A secure, fully functional admin interface to manage and update portfolio content (projects, skills, stats, etc.) on the fly.
+- **Live Integrations**: Real-time GitHub and LeetCode statistics fetching.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Framework**: [Next.js](https://nextjs.org/) (React 18/19)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Database**: [MongoDB](https://www.mongodb.com/)
+- **ORM**: [Prisma](https://www.prisma.io/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-## Learn More
+## 🚀 Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+To run this project locally, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prerequisites
+- Node.js (v18 or higher)
+- A MongoDB Database URL
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Installation
 
-## Deploy on Vercel
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/alokydv9045/Alok-portfolio-.git
+   cd alok-portfolio-nextjs
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Set up Environment Variables**
+   Create a `.env` file in the root directory and add your MongoDB connection string:
+   ```env
+   DATABASE_URL="your-mongodb-connection-string"
+   ```
+
+4. **Initialize the Database**
+   Push the Prisma schema to your database and generate the client:
+   ```bash
+   npx prisma db push
+   npx prisma generate
+   ```
+
+5. **Seed the Database (Optional)**
+   You can seed the initial data (Admin user, Default projects) by navigating to the API route locally:
+   ```
+   http://localhost:3000/api/seed
+   ```
+
+6. **Start the Development Server**
+   ```bash
+   npm run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the live result.
+
+## 🔐 Admin Access
+To access the admin dashboard, navigate to `/admin`.
+*Default Seeded Credentials:*
+- **Email**: `admin@alokyadav.com`
+- **Password**: `admin123`
+*(Make sure to change these in production!)*
+
+## 📄 License
+This project is open-source and available under the MIT License.
