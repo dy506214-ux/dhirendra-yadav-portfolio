@@ -27,7 +27,7 @@ export async function GET() {
           bio: "I build scalable web applications, intelligent software systems, and real-world digital products that solve meaningful problems. Currently serving as a Tech Associate at Invertis Innovation & Incubation.",
           heroImage: "/alok-2.jpeg",
           githubUrl: "https://github.com/alokyadav",
-          linkedinUrl: "https://linkedin.com/in/alokyadav",
+          linkedinUrl: "https://www.linkedin.com/in/alok-yadav-906920292/",
           emailAddress: "admin@alokyadav.com"
         }
       });

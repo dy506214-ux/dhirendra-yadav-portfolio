@@ -1,6 +1,9 @@
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trophy, Target } from "lucide-react";
+import { Trophy, Target, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 interface LeetCodeStats {
   totalSolved: number;
@@ -15,33 +18,53 @@ interface LeetCodeStats {
   ranking: number;
 }
 
-export default async function LeetCodeCard({ username = "alokyadav9045" }: { username?: string }) {
-  let stats: LeetCodeStats | null = null;
-  
-  try {
-    const res = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`, { next: { revalidate: 3600 } });
-    const data = await res.json();
-    if (data.status === "success") {
-      stats = data;
+export default function LeetCodeCard({ username = "alokyadav9045" }: { username?: string }) {
+  const [stats, setStats] = useState<LeetCodeStats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const res = await fetch(`/api/leetcode?username=${username}`);
+        const data = await res.json();
+        if (data.status === "success") {
+          setStats(data);
+        } else {
+          setStats({
+            totalSolved: 87, totalQuestions: 3958,
+            easySolved: 40, totalEasy: 949,
+            mediumSolved: 35, totalMedium: 2067,
+            hardSolved: 12, totalHard: 942,
+            acceptanceRate: 88.36, ranking: 1717889,
+          });
+        }
+      } catch {
+        setStats({
+          totalSolved: 87, totalQuestions: 3958,
+          easySolved: 40, totalEasy: 949,
+          mediumSolved: 35, totalMedium: 2067,
+          hardSolved: 12, totalHard: 942,
+          acceptanceRate: 88.36, ranking: 1717889,
+        });
+      } finally {
+        setLoading(false);
+      }
     }
-  } catch {
-    // API failed, silent fallback
-  }
 
-  // Fallback data provided by user if API fails
+    fetchStats();
+    
+    // Refresh every 5 minutes for real-time tracking
+    const interval = setInterval(fetchStats, 5 * 60 * 1000);
+    return () => clearInterval(interval);
+  }, [username]);
+
   const data = stats || {
-    totalSolved: 87,
-    totalQuestions: 3958,
-    easySolved: 40,
-    totalEasy: 949,
-    mediumSolved: 35,
-    totalMedium: 2067,
-    hardSolved: 12,
-    totalHard: 942,
-    acceptanceRate: 88.36,
-    ranking: 1717889,
+    totalSolved: 0, totalQuestions: 0,
+    easySolved: 0, totalEasy: 0,
+    mediumSolved: 0, totalMedium: 0,
+    hardSolved: 0, totalHard: 0,
+    acceptanceRate: 0, ranking: 0,
   };
-
 
   return (
     <Link href={`https://leetcode.com/${username}/`} target="_blank" className="block w-full h-full">
@@ -60,61 +83,80 @@ export default async function LeetCodeCard({ username = "alokyadav9045" }: { use
               <CardTitle className="text-lg sm:text-xl text-white flex items-center gap-2 truncate">
                 LeetCode Stats
               </CardTitle>
-              <p className="text-xs sm:text-sm text-gray-400 truncate">@{username}</p>
+              <div className="flex items-center gap-2">
+                <p className="text-xs sm:text-sm text-gray-400 truncate">@{username}</p>
+                <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 text-[10px] font-medium border border-green-500/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                  Live
+                </div>
+              </div>
             </div>
           </div>
           <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto bg-white/5 sm:bg-transparent p-2 sm:p-0 rounded-lg sm:rounded-none">
-            <div className="text-xs sm:text-sm text-gray-400 flex items-center gap-1">
-              <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" /> Rank
-            </div>
-            <div className="text-sm sm:text-base font-bold text-white tracking-tight">{data.ranking.toLocaleString()}</div>
+            {loading ? <Loader2 className="w-4 h-4 animate-spin text-orange-500" /> : (
+              <>
+                <div className="text-xs sm:text-sm text-gray-400 flex items-center gap-1">
+                  <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" /> Rank
+                </div>
+                <div className="text-sm sm:text-base font-bold text-white tracking-tight">{data.ranking.toLocaleString()}</div>
+              </>
+            )}
           </div>
         </CardHeader>
         
-        <CardContent className="relative z-10 pt-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
-            <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
-              <div className="text-gray-400 text-xs sm:text-sm mb-1 flex items-center gap-1 sm:gap-2">
-                <Target className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" /> Solved
-              </div>
-              <div className="text-lg sm:text-2xl font-bold text-white">
-                {data.totalSolved} <span className="text-[10px] sm:text-sm text-gray-500 font-normal">/ {data.totalQuestions}</span>
-              </div>
+        <CardContent className="relative z-10 pt-4 flex-grow flex flex-col justify-center">
+          {loading ? (
+            <div className="flex flex-col items-center justify-center h-full min-h-[160px] space-y-4">
+              <Loader2 className="w-8 h-8 animate-spin text-orange-500 opacity-50" />
+              <p className="text-sm text-gray-400">Fetching live stats...</p>
             </div>
-            <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
-              <div className="text-emerald-400 text-xs sm:text-sm mb-1 font-medium">Easy</div>
-              <div className="text-base sm:text-xl font-bold text-white">
-                {data.easySolved} <span className="text-[10px] sm:text-xs text-gray-500 font-normal">/ {data.totalEasy}</span>
+          ) : (
+            <>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
+                <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
+                  <div className="text-gray-400 text-xs sm:text-sm mb-1 flex items-center gap-1 sm:gap-2">
+                    <Target className="w-3 h-3 sm:w-4 sm:h-4 text-blue-400" /> Solved
+                  </div>
+                  <div className="text-lg sm:text-2xl font-bold text-white">
+                    {data.totalSolved} <span className="text-[10px] sm:text-sm text-gray-500 font-normal">/ {data.totalQuestions}</span>
+                  </div>
+                </div>
+                <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
+                  <div className="text-emerald-400 text-xs sm:text-sm mb-1 font-medium">Easy</div>
+                  <div className="text-base sm:text-xl font-bold text-white">
+                    {data.easySolved} <span className="text-[10px] sm:text-xs text-gray-500 font-normal">/ {data.totalEasy}</span>
+                  </div>
+                </div>
+                <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
+                  <div className="text-yellow-400 text-xs sm:text-sm mb-1 font-medium">Medium</div>
+                  <div className="text-base sm:text-xl font-bold text-white">
+                    {data.mediumSolved} <span className="text-[10px] sm:text-xs text-gray-500 font-normal">/ {data.totalMedium}</span>
+                  </div>
+                </div>
+                <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
+                  <div className="text-red-400 text-xs sm:text-sm mb-1 font-medium">Hard</div>
+                  <div className="text-base sm:text-xl font-bold text-white">
+                    {data.hardSolved} <span className="text-[10px] sm:text-xs text-gray-500 font-normal">/ {data.totalHard}</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
-              <div className="text-yellow-400 text-xs sm:text-sm mb-1 font-medium">Medium</div>
-              <div className="text-base sm:text-xl font-bold text-white">
-                {data.mediumSolved} <span className="text-[10px] sm:text-xs text-gray-500 font-normal">/ {data.totalMedium}</span>
-              </div>
-            </div>
-            <div className="bg-black/40 rounded-xl p-3 sm:p-4 border border-white/5">
-              <div className="text-red-400 text-xs sm:text-sm mb-1 font-medium">Hard</div>
-              <div className="text-base sm:text-xl font-bold text-white">
-                {data.hardSolved} <span className="text-[10px] sm:text-xs text-gray-500 font-normal">/ {data.totalHard}</span>
-              </div>
-            </div>
-          </div>
 
-          <div className="space-y-4">
-            <div>
-              <div className="flex justify-between text-sm mb-2">
-                <span className="text-gray-400">Acceptance Rate</span>
-                <span className="text-white font-medium">{data.acceptanceRate}%</span>
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-gray-400">Acceptance Rate</span>
+                    <span className="text-white font-medium">{data.acceptanceRate}%</span>
+                  </div>
+                  <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                    <div 
+                      className="bg-orange-500 h-2 rounded-full transition-all duration-1000" 
+                      style={{ width: `${data.acceptanceRate}%` }}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-                <div 
-                  className="bg-orange-500 h-2 rounded-full transition-all duration-1000" 
-                  style={{ width: `${data.acceptanceRate}%` }}
-                />
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </CardContent>
       </Card>
     </Link>

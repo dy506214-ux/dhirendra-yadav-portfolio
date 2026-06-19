@@ -22,8 +22,8 @@ export function proxy(req: NextRequest) {
       const user = auth[0];
       const pass = auth[1];
 
-      // Check credentials (username is always "admin")
-      if (user === 'admin' && pass === adminPassword) {
+      // Check credentials (username is Alokydv9045)
+      if (user === 'Alokydv9045' && pass === adminPassword) {
         return NextResponse.next();
       }
     } catch (e) {

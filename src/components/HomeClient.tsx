@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Download, Monitor, Database, Cloud, Layout, Zap, Code, Shield, BrainCircuit, Rocket, Car, Mic, Plane, Building, Target, LineChart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +11,9 @@ import RippleGrid from "@/components/ui/RippleGrid";
 
 export default function HomeClient({ data }: { data: { profile: { name: string; titles: string[]; bio: string; [key: string]: unknown }; stats: { label: string; value: string; [key: string]: unknown }[] } }) {
   const { profile, stats } = data;
+  const { scrollY } = useScroll();
+  const iconOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   return (
     <main className="min-h-screen relative overflow-hidden pb-16 lg:pb-32">
       {/* Background Ripple Grid */}
@@ -119,17 +122,19 @@ export default function HomeClient({ data }: { data: { profile: { name: string; 
             </div>
 
             {/* Floating Icons */}
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="hidden lg:flex absolute top-10 -left-12 glass-card p-4 rounded-xl border border-neon-blue/30 text-neon-blue bg-black/50 backdrop-blur-md">
-              <Code className="w-6 h-6" />
-            </motion.div>
-            <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="hidden lg:flex absolute top-1/2 -left-20 glass-card p-4 rounded-xl border border-white/20 text-gray-400 bg-black/50 backdrop-blur-md">
-              <Cloud className="w-6 h-6" />
-            </motion.div>
-            <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="hidden lg:flex absolute top-1/4 -right-12 glass-card p-4 rounded-xl border border-white/20 text-gray-400 bg-black/50 backdrop-blur-md">
-              <Database className="w-6 h-6" />
-            </motion.div>
-            <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="hidden lg:flex absolute bottom-1/4 -right-20 glass-card p-4 rounded-xl border border-neon-blue/30 text-neon-blue bg-black/50 backdrop-blur-md">
-              <LineChart className="w-6 h-6" />
+            <motion.div style={{ opacity: iconOpacity }} className="hidden lg:block absolute inset-0 pointer-events-none">
+              <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} className="absolute top-10 -left-12 glass-card p-4 rounded-xl border border-neon-blue/30 text-neon-blue bg-black/50 backdrop-blur-md pointer-events-auto">
+                <Code className="w-6 h-6" />
+              </motion.div>
+              <motion.div animate={{ y: [0, 15, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute top-1/2 -left-20 glass-card p-4 rounded-xl border border-white/20 text-gray-400 bg-black/50 backdrop-blur-md pointer-events-auto">
+                <Cloud className="w-6 h-6" />
+              </motion.div>
+              <motion.div animate={{ y: [0, -12, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} className="absolute top-1/4 -right-12 glass-card p-4 rounded-xl border border-white/20 text-gray-400 bg-black/50 backdrop-blur-md pointer-events-auto">
+                <Database className="w-6 h-6" />
+              </motion.div>
+              <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} className="absolute bottom-1/4 -right-20 glass-card p-4 rounded-xl border border-neon-blue/30 text-neon-blue bg-black/50 backdrop-blur-md pointer-events-auto">
+                <LineChart className="w-6 h-6" />
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

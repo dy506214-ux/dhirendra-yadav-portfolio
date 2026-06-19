@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { revalidatePath } from "next/cache";
+import { uploadToCloudinary } from "@/lib/cloudinary";
 
 export default async function AdminProfilePage() {
   const profile = await prisma.profileInfo.findFirst() || {
@@ -15,10 +16,20 @@ export default async function AdminProfilePage() {
     "use server";
     const name = formData.get("name") as string;
     const bio = formData.get("bio") as string;
-    const heroImage = formData.get("heroImage") as string;
-    const resumeLink = formData.get("resumeLink") as string;
+    let heroImage = formData.get("heroImage") as string;
+    let resumeLink = formData.get("resumeLink") as string;
     const titlesRaw = formData.get("titles") as string;
     const titles = titlesRaw.split(",").map(t => t.trim());
+
+    const heroImageFile = formData.get("heroImageFile") as File;
+    if (heroImageFile && heroImageFile.size > 0) {
+      heroImage = await uploadToCloudinary(heroImageFile);
+    }
+
+    const resumeFile = formData.get("resumeFile") as File;
+    if (resumeFile && resumeFile.size > 0) {
+      resumeLink = await uploadToCloudinary(resumeFile);
+    }
 
     const existing = await prisma.profileInfo.findFirst();
     if (existing) {
@@ -40,7 +51,7 @@ export default async function AdminProfilePage() {
     <div className="max-w-4xl space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-white mb-2">Profile Information</h1>
-        <p className="text-gray-400">Update your hero section and about page content here.</p>
+        <p className="text-gray-400">Update your hero section and about page content here. You can upload files directly.</p>
       </div>
 
       <Card className="bg-black/40 border-white/10 backdrop-blur-md">
@@ -68,12 +79,14 @@ export default async function AdminProfilePage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="heroImage" className="text-gray-300">Hero Image URL</Label>
-                <Input id="heroImage" name="heroImage" defaultValue={profile.heroImage || ""} className="bg-black/50 border-white/10 text-white" />
+                <Label htmlFor="heroImageFile" className="text-gray-300">Upload Hero Image</Label>
+                <Input type="file" id="heroImageFile" name="heroImageFile" accept="image/*" className="bg-black/50 border-white/10 text-white file:text-white" />
+                <Input id="heroImage" name="heroImage" defaultValue={profile.heroImage || ""} placeholder="Or Fallback URL" className="bg-black/50 border-white/10 text-white mt-2" />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="resumeLink" className="text-gray-300">Resume PDF Link</Label>
-                <Input id="resumeLink" name="resumeLink" defaultValue={profile.resumeLink || ""} placeholder="e.g. /resume.pdf or Google Drive link" className="bg-black/50 border-white/10 text-white" />
+                <Label htmlFor="resumeFile" className="text-gray-300">Upload Resume PDF</Label>
+                <Input type="file" id="resumeFile" name="resumeFile" accept=".pdf,.doc,.docx" className="bg-black/50 border-white/10 text-white file:text-white" />
+                <Input id="resumeLink" name="resumeLink" defaultValue={profile.resumeLink || ""} placeholder="Or Fallback URL" className="bg-black/50 border-white/10 text-white mt-2" />
               </div>
             </div>
 

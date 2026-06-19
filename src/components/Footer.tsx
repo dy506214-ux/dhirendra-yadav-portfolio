@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { GitBranch, Briefcase, Hash, Mail, Eye } from "lucide-react";
+import { Mail, Eye } from "lucide-react";
+import { GithubIcon, LinkedinIcon, TwitterIcon } from "@/components/icons";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -30,13 +31,13 @@ export default function Footer() {
           
           <div className="flex items-center gap-4">
             <Link href="https://github.com/alokydv9045" target="_blank" className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-neon-blue/50 transition-colors">
-              <GitBranch className="w-5 h-5" />
+              <GithubIcon className="w-5 h-5" />
             </Link>
             <Link href="https://www.linkedin.com/in/alok-yadav-906920292/" target="_blank" className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-[#0a66c2] hover:border-[#0a66c2]/50 transition-colors">
-              <Briefcase className="w-5 h-5" />
+              <LinkedinIcon className="w-5 h-5" />
             </Link>
             <Link href="https://twitter.com/alokyadav" target="_blank" className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-[#1d9bf0] hover:border-[#1d9bf0]/50 transition-colors">
-              <Hash className="w-5 h-5" />
+              <TwitterIcon className="w-5 h-5" />
             </Link>
             <Link href="mailto:Alokyadav83956@gmail.com" className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-neon-blue hover:border-neon-blue/50 transition-colors">
               <Mail className="w-5 h-5" />

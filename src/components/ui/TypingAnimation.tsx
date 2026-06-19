@@ -56,7 +56,7 @@ export function TypingAnimation({
             key={index} 
             className={isHighlight ? highlightColor : ""}
           >
-            {letter === " " ? "\u00A0" : letter}
+            {letter}
           </motion.span>
         );
       })}

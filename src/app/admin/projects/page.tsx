@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { revalidatePath } from "next/cache";
+import { uploadToCloudinary } from "@/lib/cloudinary";
+import Link from "next/link";
 
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({ orderBy: { id: 'desc' } });
@@ -13,7 +15,7 @@ export default async function AdminProjectsPage() {
     "use server";
     const title = formData.get("title") as string;
     const description = formData.get("description") as string;
-    const imageUrl = formData.get("imageUrl") as string;
+    let imageUrl = formData.get("imageUrl") as string;
     const liveLink = formData.get("liveLink") as string;
     const githubLink = formData.get("githubLink") as string;
     const techStackRaw = formData.get("techStack") as string;
@@ -21,6 +23,11 @@ export default async function AdminProjectsPage() {
     const detailedOverview = formData.get("detailedOverview") as string;
     const keyFeaturesRaw = formData.get("keyFeatures") as string;
     const keyFeatures = keyFeaturesRaw ? keyFeaturesRaw.split("|").map(f => f.trim()) : [];
+
+    const imageFile = formData.get("imageFile") as File;
+    if (imageFile && imageFile.size > 0) {
+      imageUrl = await uploadToCloudinary(imageFile);
+    }
 
     if (!title || !description) return;
 
@@ -54,7 +61,7 @@ export default async function AdminProjectsPage() {
         <Card className="bg-black/40 border-white/10 backdrop-blur-md h-fit">
           <CardHeader>
             <CardTitle className="text-white">Add New Project</CardTitle>
-            <CardDescription className="text-gray-400">Create a new project entry.</CardDescription>
+            <CardDescription className="text-gray-400">Create a new project entry. Upload image directly.</CardDescription>
           </CardHeader>
           <CardContent>
             <form action={addProject} className="space-y-4">
@@ -80,8 +87,9 @@ export default async function AdminProjectsPage() {
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="imageUrl" className="text-gray-300">Image URL</Label>
-                  <Input id="imageUrl" name="imageUrl" className="bg-black/50 border-white/10 text-white" />
+                  <Label htmlFor="imageFile" className="text-gray-300">Upload Project Image</Label>
+                  <Input type="file" id="imageFile" name="imageFile" accept="image/*" className="bg-black/50 border-white/10 text-white file:text-white" />
+                  <Input id="imageUrl" name="imageUrl" placeholder="Or fallback Image URL" className="bg-black/50 border-white/10 text-white mt-2" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="liveLink" className="text-gray-300">Live URL</Label>
@@ -114,12 +122,17 @@ export default async function AdminProjectsPage() {
                         <CardTitle className="text-white text-lg">{project.title}</CardTitle>
                         <CardDescription className="text-gray-400 line-clamp-1">{project.description}</CardDescription>
                       </div>
-                      <form action={deleteProject}>
-                        <input type="hidden" name="id" value={project.id} />
-                        <Button type="submit" variant="destructive" size="sm" className="bg-red-500/20 text-red-500 hover:bg-red-500/40 border-0">
-                          Delete
-                        </Button>
-                      </form>
+                      <div className="flex gap-2">
+                        <Link href={`/admin/projects/${project.id}`} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-white/10 text-white hover:bg-white/20 h-8 px-3">
+                          Edit
+                        </Link>
+                        <form action={deleteProject}>
+                          <input type="hidden" name="id" value={project.id} />
+                          <Button type="submit" variant="destructive" size="sm" className="bg-red-500/20 text-red-500 hover:bg-red-500/40 border-0">
+                            Delete
+                          </Button>
+                        </form>
+                      </div>
                     </div>
                   </CardHeader>
                 </Card>
