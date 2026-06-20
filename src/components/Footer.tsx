@@ -12,7 +12,7 @@ export default function Footer() {
     e.preventDefault();
     const isConfirmed = window.confirm("You are entering the Admin Panel. Do you want to continue?");
     if (isConfirmed) {
-      router.push("/admin");
+      window.location.href = "/admin";
     }
   };
 
