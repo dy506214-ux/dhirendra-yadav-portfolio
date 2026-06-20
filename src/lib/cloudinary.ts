@@ -11,8 +11,16 @@ export async function uploadToCloudinary(file: File): Promise<string> {
   const buffer = Buffer.from(arrayBuffer);
 
   return new Promise<string>((resolve, reject) => {
+    const isRaw = file.type === "application/pdf" || file.name.endsWith('.pdf') || file.name.endsWith('.doc') || file.name.endsWith('.docx');
+    
     cloudinary.uploader.upload_stream(
-      { resource_type: "auto", folder: "portfolio" },
+      { 
+        resource_type: isRaw ? "raw" : "auto", 
+        folder: "portfolio",
+        use_filename: true,
+        unique_filename: true,
+        format: isRaw ? undefined : (file.name.includes('.') ? file.name.split('.').pop() : undefined)
+      },
       (error, result) => {
         if (error || !result) {
           reject(error || new Error("Upload failed"));

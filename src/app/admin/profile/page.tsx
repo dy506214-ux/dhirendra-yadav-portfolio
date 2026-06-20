@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { revalidatePath } from "next/cache";
 import { uploadToCloudinary } from "@/lib/cloudinary";
+import { ClientForm } from "@/components/ClientForm";
 
 export default async function AdminProfilePage() {
   const profile = await prisma.profileInfo.findFirst() || {
@@ -60,7 +61,7 @@ export default async function AdminProfilePage() {
           <CardDescription className="text-gray-400">These details are shown on your public homepage.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={updateProfile} className="space-y-6">
+          <ClientForm action={updateProfile} className="space-y-6" resetOnSuccess={false}>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-300">Full Name</Label>
@@ -93,7 +94,7 @@ export default async function AdminProfilePage() {
             <Button type="submit" className="bg-neon-blue text-black hover:bg-neon-blue/80 font-bold px-8">
               Save Changes
             </Button>
-          </form>
+          </ClientForm>
         </CardContent>
       </Card>
     </div>

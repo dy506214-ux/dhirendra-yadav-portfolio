@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { revalidatePath } from "next/cache";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import Link from "next/link";
+import { ClientForm } from "@/components/ClientForm";
 
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({ orderBy: { id: 'desc' } });
@@ -64,7 +65,7 @@ export default async function AdminProjectsPage() {
             <CardDescription className="text-gray-400">Create a new project entry. Upload image directly.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form action={addProject} className="space-y-4">
+            <ClientForm action={addProject} className="space-y-4" successMessage="Project added!">
               <div className="space-y-2">
                 <Label htmlFor="title" className="text-gray-300">Project Title</Label>
                 <Input id="title" name="title" required className="bg-black/50 border-white/10 text-white" />
@@ -103,7 +104,7 @@ export default async function AdminProjectsPage() {
               <Button type="submit" className="w-full bg-neon-blue text-white hover:bg-neon-blue/80 font-bold">
                 Add Project
               </Button>
-            </form>
+            </ClientForm>
           </CardContent>
         </Card>
 
@@ -126,12 +127,12 @@ export default async function AdminProjectsPage() {
                         <Link href={`/admin/projects/${project.id}`} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-white/10 text-white hover:bg-white/20 h-8 px-3">
                           Edit
                         </Link>
-                        <form action={deleteProject}>
+                        <ClientForm action={deleteProject} successMessage="Project deleted!">
                           <input type="hidden" name="id" value={project.id} />
                           <Button type="submit" variant="destructive" size="sm" className="bg-red-500/20 text-red-500 hover:bg-red-500/40 border-0">
                             Delete
                           </Button>
-                        </form>
+                        </ClientForm>
                       </div>
                     </div>
                   </CardHeader>

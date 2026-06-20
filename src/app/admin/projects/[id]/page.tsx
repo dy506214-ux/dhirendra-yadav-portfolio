@@ -9,6 +9,7 @@ import { uploadToCloudinary } from "@/lib/cloudinary";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { ClientForm } from "@/components/ClientForm";
 
 export default async function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -68,7 +69,7 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
           <CardDescription className="text-gray-400">Make changes to the project and save.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={updateProject} className="space-y-4">
+          <ClientForm action={updateProject} className="space-y-4" successMessage="Project updated!" resetOnSuccess={false}>
             <div className="space-y-2">
               <Label htmlFor="title" className="text-gray-300">Project Title</Label>
               <Input id="title" name="title" defaultValue={project.title} required className="bg-black/50 border-white/10 text-white" />
@@ -107,7 +108,7 @@ export default async function EditProjectPage({ params }: { params: Promise<{ id
             <Button type="submit" className="w-full bg-neon-blue text-white hover:bg-neon-blue/80 font-bold">
               Save Changes
             </Button>
-          </form>
+          </ClientForm>
         </CardContent>
       </Card>
     </div>

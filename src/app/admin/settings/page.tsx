@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { addAdmin, changePassword, deleteAdmin } from "./actions";
+import { ClientForm } from "@/components/ClientForm";
 
 export default async function AdminSettingsPage() {
   const admins = await prisma.admin.findMany({ select: { id: true, email: true, name: true } });
@@ -23,7 +24,7 @@ export default async function AdminSettingsPage() {
             <CardDescription className="text-gray-400">Create a new administrator account.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form action={addAdmin} className="space-y-4">
+            <ClientForm action={addAdmin} className="space-y-4" successMessage="Admin added!">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-300">Name</Label>
                 <Input id="name" name="name" required className="bg-black/50 border-white/10 text-white" />
@@ -39,7 +40,7 @@ export default async function AdminSettingsPage() {
               <Button type="submit" className="w-full bg-neon-blue text-black hover:bg-neon-blue/80 font-bold">
                 Add User
               </Button>
-            </form>
+            </ClientForm>
           </CardContent>
         </Card>
 
@@ -51,7 +52,7 @@ export default async function AdminSettingsPage() {
               <CardDescription className="text-gray-400">Update an existing administrator's password.</CardDescription>
             </CardHeader>
             <CardContent>
-              <form action={changePassword} className="space-y-4">
+              <ClientForm action={changePassword} className="space-y-4" successMessage="Password updated!">
                 <div className="space-y-2">
                   <Label htmlFor="targetEmail" className="text-gray-300">Admin Email</Label>
                   <Input id="targetEmail" name="email" type="email" required className="bg-black/50 border-white/10 text-white" />
@@ -63,7 +64,7 @@ export default async function AdminSettingsPage() {
                 <Button type="submit" className="w-full border border-white/20 text-white hover:bg-white/5 font-bold">
                   Update Password
                 </Button>
-              </form>
+              </ClientForm>
             </CardContent>
           </Card>
 
@@ -82,12 +83,12 @@ export default async function AdminSettingsPage() {
                           <CardTitle className="text-white text-base">{admin.name}</CardTitle>
                           <CardDescription className="text-gray-400 text-sm">{admin.email}</CardDescription>
                         </div>
-                        <form action={deleteAdmin}>
+                        <ClientForm action={deleteAdmin} successMessage="Admin revoked!">
                           <input type="hidden" name="id" value={admin.id} />
                           <Button type="submit" variant="destructive" size="sm" className="bg-red-500/20 text-red-500 hover:bg-red-500/40 border-0">
                             Revoke
                           </Button>
-                        </form>
+                        </ClientForm>
                       </div>
                     </CardHeader>
                   </Card>

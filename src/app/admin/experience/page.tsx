@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { revalidatePath } from "next/cache";
+import { ClientForm } from "@/components/ClientForm";
 
 export default async function AdminExperiencePage() {
   const experiences = await prisma.experience.findMany({ orderBy: { id: 'desc' } });
@@ -51,7 +52,7 @@ export default async function AdminExperiencePage() {
             <CardTitle className="text-white">Add New Role</CardTitle>
           </CardHeader>
           <CardContent>
-            <form action={addExperience} className="space-y-4">
+            <ClientForm action={addExperience} className="space-y-4" successMessage="Experience added!">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="role" className="text-gray-300">Job Role</Label>
@@ -83,7 +84,7 @@ export default async function AdminExperiencePage() {
               <Button type="submit" className="w-full bg-neon-blue text-white hover:bg-neon-blue/80 font-bold">
                 Add Experience
               </Button>
-            </form>
+            </ClientForm>
           </CardContent>
         </Card>
 
@@ -101,12 +102,12 @@ export default async function AdminExperiencePage() {
                         <CardTitle className="text-white text-lg">{item.role}</CardTitle>
                         <CardDescription className="text-gray-400 mt-1">{item.company} | {item.startDate} - {item.current ? "Present" : item.endDate}</CardDescription>
                       </div>
-                      <form action={deleteExperience}>
+                      <ClientForm action={deleteExperience} successMessage="Experience deleted!">
                         <input type="hidden" name="id" value={item.id} />
                         <Button type="submit" variant="destructive" size="sm" className="bg-red-500/20 text-red-500 hover:bg-red-500/40 border-0">
                           Delete
                         </Button>
-                      </form>
+                      </ClientForm>
                     </div>
                   </CardHeader>
                 </Card>

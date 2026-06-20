@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { revalidatePath } from "next/cache";
+import { ClientForm } from "@/components/ClientForm";
 
 export default async function AdminSkillsPage() {
   const skills = await prisma.techSkill.findMany({ orderBy: { category: 'asc' } });
@@ -48,7 +49,7 @@ export default async function AdminSkillsPage() {
             <CardTitle className="text-white">Add New Skill</CardTitle>
           </CardHeader>
           <CardContent>
-            <form action={addSkill} className="space-y-4">
+            <ClientForm action={addSkill} className="space-y-4" successMessage="Skill added!">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-gray-300">Skill Name (e.g. React, Node.js)</Label>
                 <Input id="name" name="name" required className="bg-black/50 border-white/10 text-white" />
@@ -60,7 +61,7 @@ export default async function AdminSkillsPage() {
               <Button type="submit" className="w-full bg-neon-blue text-black hover:bg-neon-blue/80 font-bold">
                 Add Skill
               </Button>
-            </form>
+            </ClientForm>
           </CardContent>
         </Card>
 
@@ -78,12 +79,12 @@ export default async function AdminSkillsPage() {
                         <CardTitle className="text-white text-base">{item.name}</CardTitle>
                         <CardDescription className="text-gray-400 text-xs mt-1">{item.category}</CardDescription>
                       </div>
-                      <form action={deleteSkill}>
+                      <ClientForm action={deleteSkill} successMessage="Skill deleted!">
                         <input type="hidden" name="id" value={item.id} />
                         <Button type="submit" variant="destructive" size="sm" className="h-8 bg-red-500/20 text-red-500 hover:bg-red-500/40 border-0">
                           Delete
                         </Button>
-                      </form>
+                      </ClientForm>
                     </div>
                   </CardHeader>
                 </Card>
