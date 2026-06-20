@@ -83,17 +83,9 @@ export default function HomeClient({ data }: { data: { profile: { name: string; 
               <Link href="#projects" className="bg-gradient-to-r from-neon-blue to-neon-blue text-white px-8 py-3 rounded-full font-medium flex items-center gap-2 hover:shadow-[0_0_20px_rgba(0,210,255,0.4)] transition-all">
                 View My Work <ArrowRight className="w-4 h-4" />
               </Link>
-              {(() => {
-                let resumeUrl = profile.resumeLink as string || "/resume.pdf";
-                if (resumeUrl.includes("res.cloudinary.com") && !resumeUrl.includes("fl_attachment")) {
-                  resumeUrl = resumeUrl.replace("/upload/", "/upload/fl_attachment/");
-                }
-                return (
-                  <a href={resumeUrl} target="_blank" download="Alok_Yadav_Resume.pdf" className="glass-card px-8 py-3 rounded-full font-medium flex items-center gap-2 hover:bg-white/5 transition-all text-white">
-                    Download Resume <Download className="w-4 h-4" />
-                  </a>
-                );
-              })()}
+              <a href="/api/resume" className="glass-card px-8 py-3 rounded-full font-medium flex items-center gap-2 hover:bg-white/5 transition-all text-white">
+                Download Resume <Download className="w-4 h-4" />
+              </a>
             </div>
 
             <div className="pt-8 flex items-center gap-2 text-sm text-gray-400">
