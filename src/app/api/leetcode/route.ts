@@ -16,6 +16,11 @@ export async function GET(request: Request) {
     
     const data = await res.json();
     
+    // Validate that we got a correct user response, otherwise trigger fallback
+    if (!data || data.errors || !data.matchedUser || typeof data.ranking === 'undefined') {
+      throw new Error('LeetCode user not found or invalid API response structure');
+    }
+    
     // Faisal Shohag API might not include acceptanceRate directly, calculate if missing
     if (data && data.totalSubmissions && data.totalSubmissions.length > 0) {
       const allSubmissions = data.totalSubmissions.find((s: any) => s.difficulty === "All");

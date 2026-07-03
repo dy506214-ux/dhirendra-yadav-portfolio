@@ -98,7 +98,7 @@ export default function LeetCodeCard({ username = "dy506214-ux" }: { username?: 
                 <div className="text-xs sm:text-sm text-gray-400 flex items-center gap-1">
                   <Trophy className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" /> Rank
                 </div>
-                <div className="text-sm sm:text-base font-bold text-white tracking-tight">{data.ranking.toLocaleString()}</div>
+                <div className="text-sm sm:text-base font-bold text-white tracking-tight">{(data.ranking ?? 0).toLocaleString()}</div>
               </>
             )}
           </div>
