@@ -18,7 +18,7 @@ interface LeetCodeStats {
   ranking: number;
 }
 
-export default function LeetCodeCard({ username = "alokyadav9045" }: { username?: string }) {
+export default function LeetCodeCard({ username = "dy506214-ux" }: { username?: string }) {
   const [stats, setStats] = useState<LeetCodeStats | null>(null);
   const [loading, setLoading] = useState(true);
 

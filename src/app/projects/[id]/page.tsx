@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import Script from "next/script";
 
-const siteUrl = "https://alokyadav.me";
+const siteUrl = "https://dhirendrayadav.me";
 
 export async function generateStaticParams() {
   const projects = await prisma.project.findMany();
@@ -39,12 +39,12 @@ export async function generateMetadata({
     keywords: [
       project.title,
       ...project.techStack,
-      "Alok Yadav",
+      "Dhirendra Yadav",
       "Full Stack Developer",
       "Portfolio Project",
     ],
     openGraph: {
-      title: `${project.title} | Alok Yadav`,
+      title: `${project.title} | Dhirendra Yadav`,
       description,
       url,
       type: "website",
@@ -52,7 +52,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} | Alok Yadav`,
+      title: `${project.title} | Dhirendra Yadav`,
       description,
       images: [image],
     },
@@ -81,7 +81,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     applicationCategory: "WebApplication",
     author: {
       "@type": "Person",
-      name: "Alok Yadav",
+      name: "Dhirendra Yadav",
       url: siteUrl,
     },
     url: project.liveLink || `${siteUrl}/projects/${project.id}`,

@@ -17,30 +17,30 @@ async function main() {
   console.log("Seeding database...");
 
   // Seed Admin
-  const adminExists = await prisma.admin.findUnique({ where: { email: 'admin@alokyadav.com' } });
+  const adminExists = await prisma.admin.findUnique({ where: { email: 'admin@dhirendra.com' } });
   if (!adminExists) {
     const hashedPassword = await bcrypt.hash('admin123', 10);
     await prisma.admin.create({
       data: {
-        email: 'admin@alokyadav.com',
+        email: 'admin@dhirendra.com',
         password: hashedPassword,
-        name: 'Alok Yadav',
+        name: 'Dhirendra Yadav',
       }
     });
-    console.log("Admin created (admin@alokyadav.com / admin123)");
+    console.log("Admin created (admin@dhirendra.com / admin123)");
   }
 
   // Seed Profile Info
   await prisma.profileInfo.create({
     data: {
-      name: "Alok Yadav",
-      titles: ["Full Stack Developer", "Tech Associate", "Startup Builder"],
+      name: "Dhirendra yadav",
+      titles: ["Full Stack App Developer", "Tech Associate", "Startup Builder"],
       bio: "I build scalable web applications, intelligent software systems, and real-world digital products that solve meaningful problems. Currently serving as a Tech Associate at Invertis Innovation & Incubation, I work on product development, startup incubation projects, AI-powered solutions, and enterprise-grade software systems.",
       heroImage: "https://images.unsplash.com/photo-1555952517-2e8e729e0b44?auto=format&fit=crop&w=800&q=80",
-      githubUrl: "https://github.com/alokyadav",
-      linkedinUrl: "https://linkedin.com/in/alokyadav",
-      twitterUrl: "https://twitter.com/alokyadav",
-      emailAddress: "admin@alokyadav.com"
+      githubUrl: "https://github.com/dy506214-ux",
+      linkedinUrl: "https://linkedin.com/in/dhirendra-yadav-ux",
+      twitterUrl: "https://twitter.com/dy506214-ux",
+      emailAddress: "admin@dhirendra.com"
     }
   });
 
@@ -114,7 +114,7 @@ async function main() {
     { name: "Bootstrap", category: "Frontend" },
     { name: "Responsive Design", category: "Frontend" },
     { name: "UI/UX Design", category: "Frontend" },
-    
+
     { name: "Node.js", category: "Backend" },
     { name: "Express.js", category: "Backend" },
     { name: "REST APIs", category: "Backend" },

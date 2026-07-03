@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const username = searchParams.get('username') || 'alokyadav9045';
+  const username = searchParams.get('username') || 'dy506214-ux';
 
   try {
     const res = await fetch(`https://leetcode-api-faisalshohag.vercel.app/${username}`, { cache: 'no-store' });

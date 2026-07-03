@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GitBranch, Loader2 } from "lucide-react";
 import Link from "next/link";
 
-export default function GithubCalendarCard({ username = "alokydv9045" }: { username?: string }) {
+export default function GithubCalendarCard({ username = "dy506214-ux" }: { username?: string }) {
   const [mounted, setMounted] = useState(false);
   const [blockSize, setBlockSize] = useState(12);
   const [isMobile, setIsMobile] = useState(false);

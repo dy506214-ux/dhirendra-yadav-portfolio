@@ -1,6 +1,6 @@
-# Alok Yadav - Full Stack Developer Portfolio
+# Dhirendra Yadav - Full Stack Developer Portfolio
 
-Welcome to the open-source repository of my personal portfolio website. This project is a modern, high-performance web application designed to showcase my skills, projects, and professional journey as a Full Stack Developer and Tech Associate.
+Welcome to the open-source repository of Dhirendra Yadav's personal portfolio website. This project is a modern, high-performance web application designed to showcase his skills, projects, and professional journey as a Full Stack Developer and Tech Associate.
 
 ![Portfolio Screenshot](./public/portfolio-screenshot.png)
 
@@ -34,8 +34,8 @@ To run this project locally, follow these steps:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/alokydv9045/Alok-portfolio-.git
-   cd alok-portfolio-nextjs
+   git clone https://github.com/dy506214-ux/dhirendra-yadav-portfolio.git
+   cd dhirendra-yadav-portfolio
    ```
 
 2. **Install dependencies**

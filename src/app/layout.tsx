@@ -17,20 +17,20 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = "https://alokyadav.me";
-const siteTitle = "Alok Yadav | Full Stack Developer & Startup Builder";
+const siteUrl = "https://dhirendrayadav.me";
+const siteTitle = "Dhirendra Yadav | Full Stack Developer & Startup Builder";
 const siteDescription =
-  "Alok Yadav is a Full Stack Developer and Startup Builder from India. He builds scalable web apps, intelligent software systems, and real-world digital products using React, Next.js, Node.js, and MongoDB.";
+  "Dhirendra Yadav is a Full Stack Developer and Startup Builder from India. He builds scalable web apps, intelligent software systems, and real-world digital products using React, Next.js, Node.js, and MongoDB.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: siteTitle,
-    template: "%s | Alok Yadav",
+    template: "%s | Dhirendra Yadav",
   },
   description: siteDescription,
   keywords: [
-    "Alok Yadav",
+    "Dhirendra Yadav",
     "Full Stack Developer",
     "Startup Builder",
     "React Developer",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
     "JavaScript Developer",
     "TypeScript Developer",
   ],
-  authors: [{ name: "Alok Yadav", url: siteUrl }],
-  creator: "Alok Yadav",
-  publisher: "Alok Yadav",
+  authors: [{ name: "Dhirendra Yadav", url: siteUrl }],
+  creator: "Dhirendra Yadav",
+  publisher: "Dhirendra Yadav",
   robots: {
     index: true,
     follow: true,
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteUrl,
-    siteName: "Alok Yadav Portfolio",
+    siteName: "Dhirendra Yadav Portfolio",
     title: siteTitle,
     description: siteDescription,
     images: [
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/alok-2.jpeg`,
         width: 1200,
         height: 630,
-        alt: "Alok Yadav – Full Stack Developer & Startup Builder",
+        alt: "Dhirendra Yadav – Full Stack Developer & Startup Builder",
       },
     ],
   },
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    creator: "@alokyadav",
+    creator: "@dy506214-ux",
     images: [`${siteUrl}/alok-2.jpeg`],
   },
   alternates: {
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Alok Yadav",
+  name: "Dhirendra Yadav",
   url: siteUrl,
   image: `${siteUrl}/alok-2.jpeg`,
   jobTitle: "Full Stack Developer & Startup Builder",
@@ -105,8 +105,8 @@ const personSchema = {
     name: "Invertis Innovation & Incubation",
   },
   sameAs: [
-    "https://github.com/alokyadav",
-    "https://www.linkedin.com/in/alok-yadav-906920292/",
+    "https://github.com/dy506214-ux",
+    "https://www.linkedin.com/in/dhirendra-yadav-ux/",
   ],
   knowsAbout: [
     "React",
@@ -123,12 +123,12 @@ const personSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Alok Yadav Portfolio",
+  name: "Dhirendra Yadav Portfolio",
   url: siteUrl,
   description: siteDescription,
   author: {
     "@type": "Person",
-    name: "Alok Yadav",
+    name: "Dhirendra Yadav",
   },
   potentialAction: {
     "@type": "SearchAction",

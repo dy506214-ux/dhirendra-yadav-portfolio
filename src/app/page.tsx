@@ -19,7 +19,7 @@ export default async function Page() {
 
   const data = {
     profile: profileInfo || {
-      name: "Alok Yadav",
+      name: "Dhirendra Yadav",
       titles: ["Full Stack Developer", "Tech Associate", "Startup Builder"],
       bio: "I build scalable web applications, intelligent software systems, and real-world digital products that solve meaningful problems.",
       heroImage: "/alok-2.jpeg",

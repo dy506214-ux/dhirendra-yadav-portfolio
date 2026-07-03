@@ -8,20 +8,20 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Get in touch with Alok Yadav – Full Stack Developer & Startup Builder. Available for freelance projects, collaborations, and full-time opportunities. Reach out via email or LinkedIn.",
-  alternates: { canonical: "https://alokyadav.me/contact" },
+    "Get in touch with Dhirendra Yadav – Full Stack Developer & Startup Builder. Available for freelance projects, collaborations, and full-time opportunities. Reach out via email or LinkedIn.",
+  alternates: { canonical: "https://dhirendrayadav.me/contact" },
   openGraph: {
-    title: "Contact Alok Yadav | Full Stack Developer",
+    title: "Contact Dhirendra Yadav | Full Stack Developer",
     description:
-      "Hire or collaborate with Alok Yadav. Available for freelance, startups, and full-time roles in Full Stack Development.",
-    url: "https://alokyadav.me/contact",
-    images: [{ url: "https://alokyadav.me/alok-2.jpeg", width: 1200, height: 630, alt: "Contact Alok Yadav" }],
+      "Hire or collaborate with Dhirendra Yadav. Available for freelance, startups, and full-time roles in Full Stack Development.",
+    url: "https://dhirendrayadav.me/contact",
+    images: [{ url: "https://dhirendrayadav.me/alok-2.jpeg", width: 1200, height: 630, alt: "Contact Dhirendra Yadav" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Alok Yadav | Full Stack Developer",
-    description: "Get in touch with Alok Yadav for freelance, collaboration, or full-time opportunities.",
-    images: ["https://alokyadav.me/alok-2.jpeg"],
+    title: "Contact Dhirendra Yadav | Full Stack Developer",
+    description: "Get in touch with Dhirendra Yadav for freelance, collaboration, or full-time opportunities.",
+    images: ["https://dhirendrayadav.me/alok-2.jpeg"],
   },
 };
 

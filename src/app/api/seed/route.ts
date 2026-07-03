@@ -5,14 +5,14 @@ import bcrypt from 'bcryptjs';
 export async function GET() {
   try {
     // Seed Admin
-    const adminExists = await prisma.admin.findUnique({ where: { email: 'admin@alokyadav.com' } });
+    const adminExists = await prisma.admin.findUnique({ where: { email: 'admin@dhirendra.com' } });
     if (!adminExists) {
       const hashedPassword = await bcrypt.hash('admin123', 10);
       await prisma.admin.create({
         data: {
-          email: 'admin@alokyadav.com',
+          email: 'admin@dhirendra.com',
           password: hashedPassword,
-          name: 'Alok Yadav',
+          name: 'Dhirendra Yadav',
         }
       });
     }
@@ -22,13 +22,13 @@ export async function GET() {
     if (!profileExists) {
       await prisma.profileInfo.create({
         data: {
-          name: "Alok Yadav",
+          name: "Dhirendra Yadav",
           titles: ["Full Stack Developer", "Tech Associate", "Startup Builder"],
           bio: "I build scalable web applications, intelligent software systems, and real-world digital products that solve meaningful problems. Currently serving as a Tech Associate at Invertis Innovation & Incubation.",
-          heroImage: "/alok-2.jpeg",
-          githubUrl: "https://github.com/alokyadav",
-          linkedinUrl: "https://www.linkedin.com/in/alok-yadav-906920292/",
-          emailAddress: "admin@alokyadav.com"
+          heroImage: "https://images.unsplash.com/photo-1555952517-2e8e729e0b44?auto=format&fit=crop&w=800&q=80",
+          githubUrl: "https://github.com/dy506214-ux",
+          linkedinUrl: "https://www.linkedin.com/in/dhirendra-yadav-ux/",
+          emailAddress: "admin@dhirendra.com"
         }
       });
     }

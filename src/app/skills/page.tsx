@@ -8,20 +8,20 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Skills",
   description:
-    "Discover Alok Yadav's tech stack and skills: React, Next.js, Node.js, TypeScript, MongoDB, Python, and more. A versatile Full Stack Developer proficient in 10+ technologies.",
-  alternates: { canonical: "https://alokyadav.me/skills" },
+    "Discover Dhirendra Yadav's tech stack and skills: React, Next.js, Node.js, TypeScript, MongoDB, Python, and more. A versatile Full Stack Developer proficient in 10+ technologies.",
+  alternates: { canonical: "https://dhirendrayadav.me/skills" },
   openGraph: {
-    title: "Technical Skills | Alok Yadav",
+    title: "Technical Skills | Dhirendra Yadav",
     description:
-      "Alok Yadav's complete tech stack: React, Next.js, Node.js, TypeScript, MongoDB, and 10+ more technologies.",
-    url: "https://alokyadav.me/skills",
-    images: [{ url: "https://alokyadav.me/alok-2.jpeg", width: 1200, height: 630, alt: "Alok Yadav Technical Skills" }],
+      "Dhirendra Yadav's complete tech stack: React, Next.js, Node.js, TypeScript, MongoDB, and 10+ more technologies.",
+    url: "https://dhirendrayadav.me/skills",
+    images: [{ url: "https://dhirendrayadav.me/alok-2.jpeg", width: 1200, height: 630, alt: "Dhirendra Yadav Technical Skills" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Technical Skills | Alok Yadav",
-    description: "React, Next.js, Node.js, TypeScript, MongoDB and more – Alok Yadav's tech stack.",
-    images: ["https://alokyadav.me/alok-2.jpeg"],
+    title: "Technical Skills | Dhirendra Yadav",
+    description: "React, Next.js, Node.js, TypeScript, MongoDB and more – Dhirendra Yadav's tech stack.",
+    images: ["https://dhirendrayadav.me/alok-2.jpeg"],
   },
 };
 

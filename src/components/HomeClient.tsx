@@ -83,7 +83,7 @@ export default function HomeClient({ data }: { data: { profile: { name: string; 
               <Link href="#projects" className="bg-gradient-to-r from-neon-blue to-neon-blue text-white px-8 py-3 rounded-full font-medium flex items-center gap-2 hover:shadow-[0_0_20px_rgba(0,210,255,0.4)] transition-all">
                 View My Work <ArrowRight className="w-4 h-4" />
               </Link>
-              <a href="/api/resume.pdf" download="Alok_Yadav_Resume.pdf" className="glass-card px-8 py-3 rounded-full font-medium flex items-center gap-2 hover:bg-white/5 transition-all text-white">
+              <a href="/api/resume.pdf" download="Dhirendra_Yadav_Resume.pdf" className="glass-card px-8 py-3 rounded-full font-medium flex items-center gap-2 hover:bg-white/5 transition-all text-white">
                 Download Resume <Download className="w-4 h-4" />
               </a>
             </div>
@@ -104,8 +104,8 @@ export default function HomeClient({ data }: { data: { profile: { name: string; 
             
             <div className="relative w-full rounded-3xl overflow-hidden border border-white/10 flex items-end justify-center bg-card hover:border-neon-blue/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_-10px_rgba(0,210,255,0.1)]">
               <Image 
-                src="/alok-namecard.jpeg" 
-                alt="Alok Yadav" 
+                src={((profile as any)?.heroImage) || "/alok-namecard.jpeg"} 
+                alt={profile.name || "Dhirendra Yadav"} 
                 width={1135}
                 height={1600}
                 sizes="(max-width: 768px) 100vw, 50vw"

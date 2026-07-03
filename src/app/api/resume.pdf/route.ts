@@ -32,7 +32,7 @@ export async function GET() {
     // Serve the file as a downloadable PDF with correct headers
     const headers = new Headers();
     headers.set("Content-Type", "application/pdf");
-    headers.set("Content-Disposition", 'attachment; filename="Alok_Yadav_Resume.pdf"');
+    headers.set("Content-Disposition", 'attachment; filename="Dhirendra_Yadav_Resume.pdf"');
     headers.set("Content-Length", buffer.length.toString());
     headers.set("Cache-Control", "public, max-age=3600, s-maxage=3600");
 

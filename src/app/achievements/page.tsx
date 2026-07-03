@@ -8,20 +8,20 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Achievements",
   description:
-    "View Alok Yadav's certifications, awards, and accomplishments as a Full Stack Developer and Startup Builder. Recognitions from leading organizations in technology and innovation.",
-  alternates: { canonical: "https://alokyadav.me/achievements" },
+    "View Dhirendra Yadav's certifications, awards, and accomplishments as a Full Stack Developer and Startup Builder. Recognitions from leading organizations in technology and innovation.",
+  alternates: { canonical: "https://dhirendrayadav.me/achievements" },
   openGraph: {
-    title: "Achievements & Certifications | Alok Yadav",
+    title: "Achievements & Certifications | Dhirendra Yadav",
     description:
-      "Alok Yadav's awards, certifications, and accomplishments in Full Stack Development and Startup Building.",
-    url: "https://alokyadav.me/achievements",
-    images: [{ url: "https://alokyadav.me/alok-2.jpeg", width: 1200, height: 630, alt: "Alok Yadav Achievements" }],
+      "Dhirendra Yadav's awards, certifications, and accomplishments in Full Stack Development and Startup Building.",
+    url: "https://dhirendrayadav.me/achievements",
+    images: [{ url: "https://dhirendrayadav.me/alok-2.jpeg", width: 1200, height: 630, alt: "Dhirendra Yadav Achievements" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Achievements & Certifications | Alok Yadav",
-    description: "Alok Yadav's awards, certifications, and accomplishments as a developer.",
-    images: ["https://alokyadav.me/alok-2.jpeg"],
+    title: "Achievements & Certifications | Dhirendra Yadav",
+    description: "Dhirendra Yadav's awards, certifications, and accomplishments as a developer.",
+    images: ["https://dhirendrayadav.me/alok-2.jpeg"],
   },
 };
 
