@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url      = "mongodb+srv://dhirendrayadav6785_db_user:dhirendrayadav7704849886@cluster0.gvykzbs.mongodb.net/portfolio?retryWrites=true&w=majority"
 }
 
 model Admin {
