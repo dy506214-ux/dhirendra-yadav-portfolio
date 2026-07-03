@@ -7,7 +7,7 @@ export function proxy(req: NextRequest) {
   // Protect all routes under /admin
   if (req.nextUrl.pathname.startsWith('/admin')) {
     // Read password from environment, with a fallback just in case
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'dhirendra77048';
     
     if (!authHeader) {
       return new NextResponse('Authentication required', {
@@ -22,8 +22,8 @@ export function proxy(req: NextRequest) {
       const user = auth[0];
       const pass = auth[1];
 
-      // Check credentials (username is dy506214-ux)
-      if (user === 'dy506214-ux' && pass === adminPassword) {
+      // Check credentials (username is dhirendrayadav)
+      if (user === 'dhirendrayadav' && pass === adminPassword) {
         return NextResponse.next();
       }
     } catch (e) {
