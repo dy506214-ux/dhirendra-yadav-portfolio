@@ -2,6 +2,8 @@ import { Layout, Users, FileText, Activity, Settings } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminDashboard() {
   const [projectsCount, skillsCount, experiencesCount, achievementsCount] = await Promise.all([
     prisma.project.count(),

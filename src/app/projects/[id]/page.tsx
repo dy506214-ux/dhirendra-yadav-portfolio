@@ -13,10 +13,15 @@ import Script from "next/script";
 const siteUrl = "https://dhirendrayadav.me";
 
 export async function generateStaticParams() {
-  const projects = await prisma.project.findMany();
-  return projects.map((project) => ({
-    id: project.id,
-  }));
+  try {
+    const projects = await prisma.project.findMany();
+    return projects.map((project) => ({
+      id: project.id,
+    }));
+  } catch (error) {
+    console.error("Error in generateStaticParams:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({
@@ -25,47 +30,58 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const project = await prisma.project.findUnique({ where: { id } });
-  if (!project) return { title: "Project Not Found" };
+  try {
+    const project = await prisma.project.findUnique({ where: { id } });
+    if (!project) return { title: "Project Not Found" };
 
-  const description = project.description.slice(0, 160);
-  const image = project.imageUrl || `${siteUrl}/portfolio-screenshot.png`;
-  const url = `${siteUrl}/projects/${id}`;
+    const description = project.description.slice(0, 160);
+    const image = project.imageUrl || `${siteUrl}/portfolio-screenshot.png`;
+    const url = `${siteUrl}/projects/${id}`;
 
-  return {
-    title: project.title,
-    description,
-    alternates: { canonical: url },
-    keywords: [
-      project.title,
-      ...project.techStack,
-      "Dhirendra Yadav",
-      "Full Stack Developer",
-      "Portfolio Project",
-    ],
-    openGraph: {
-      title: `${project.title} | Dhirendra Yadav`,
+    return {
+      title: project.title,
       description,
-      url,
-      type: "website",
-      images: [{ url: image, width: 1200, height: 630, alt: project.title }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: `${project.title} | Dhirendra Yadav`,
-      description,
-      images: [image],
-    },
-  };
+      alternates: { canonical: url },
+      keywords: [
+        project.title,
+        ...project.techStack,
+        "Dhirendra Yadav",
+        "Full Stack Developer",
+        "Portfolio Project",
+      ],
+      openGraph: {
+        title: `${project.title} | Dhirendra Yadav`,
+        description,
+        url,
+        type: "website",
+        images: [{ url: image, width: 1200, height: 630, alt: project.title }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${project.title} | Dhirendra Yadav`,
+        description,
+        images: [image],
+      },
+    };
+  } catch (error) {
+    console.error("Error in generateMetadata:", error);
+    return { title: "Project Details | Dhirendra Yadav" };
+  }
 }
 
 
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const project = await prisma.project.findUnique({
-    where: { id }
-  });
+  let project = null;
+
+  try {
+    project = await prisma.project.findUnique({
+      where: { id }
+    });
+  } catch (error) {
+    console.error("Error fetching project details during build/render:", error);
+  }
 
   if (!project) {
     notFound();

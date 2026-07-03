@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { revalidatePath } from "next/cache";
 import { ClientForm } from "@/components/ClientForm";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminSkillsPage() {
   const skills = await prisma.techSkill.findMany({ orderBy: { category: 'asc' } });
 

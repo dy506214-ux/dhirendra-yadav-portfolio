@@ -8,6 +8,8 @@ import { revalidatePath } from "next/cache";
 import { uploadToCloudinary } from "@/lib/cloudinary";
 import { ClientForm } from "@/components/ClientForm";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminProfilePage() {
   const profile = await prisma.profileInfo.findFirst() || {
     name: "", titles: [], bio: "", heroImage: "", emailAddress: "", resumeLink: ""

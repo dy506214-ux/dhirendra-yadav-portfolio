@@ -6,7 +6,12 @@ import { AnimatedHeading } from "@/components/ui/AnimatedHeading";
 import { TypingAnimation } from "@/components/ui/TypingAnimation";
 
 export default async function AchievementsSection() {
-  const achievements = await prisma.achievement.findMany();
+  let achievements: any[] = [];
+  try {
+    achievements = await prisma.achievement.findMany();
+  } catch (error) {
+    console.error("AchievementsSection database query error:", error);
+  }
 
   return (
     <div id="achievements" className="max-w-6xl mx-auto px-6 pt-32 relative z-10 scroll-mt-20">

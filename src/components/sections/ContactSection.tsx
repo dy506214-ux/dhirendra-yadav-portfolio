@@ -6,7 +6,12 @@ import { AnimatedHeading } from "@/components/ui/AnimatedHeading";
 import { TypingAnimation } from "@/components/ui/TypingAnimation";
 
 export default async function ContactSection() {
-  const profile = await prisma.profileInfo.findFirst();
+  let profile = null;
+  try {
+    profile = await prisma.profileInfo.findFirst();
+  } catch (error) {
+    console.error("ContactSection database query error:", error);
+  }
 
   return (
     <div id="contact" className="max-w-6xl mx-auto px-6 pt-32 pb-20 relative z-10 scroll-mt-20">

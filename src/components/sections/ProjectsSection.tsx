@@ -8,9 +8,14 @@ import { AnimatedHeading } from "@/components/ui/AnimatedHeading";
 import { TypingAnimation } from "@/components/ui/TypingAnimation";
 
 export default async function ProjectsSection() {
-  const projects = await prisma.project.findMany({
-    orderBy: { featured: 'desc' }
-  });
+  let projects: any[] = [];
+  try {
+    projects = await prisma.project.findMany({
+      orderBy: { featured: 'desc' }
+    });
+  } catch (error) {
+    console.error("ProjectsSection database query error:", error);
+  }
 
   return (
     <div id="projects" className="max-w-7xl mx-auto px-6 pt-32 relative z-10 scroll-mt-20">
@@ -52,7 +57,7 @@ export default async function ProjectsSection() {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {project.techStack.map(tech => (
+                  {project.techStack.map((tech: string) => (
                     <Badge key={tech} variant="secondary" className="bg-neon-blue/10 text-neon-blue hover:bg-neon-blue/20">
                       {tech}
                     </Badge>

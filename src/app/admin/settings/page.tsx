@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { addAdmin, changePassword, deleteAdmin } from "./actions";
 import { ClientForm } from "@/components/ClientForm";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminSettingsPage() {
   const admins = await prisma.admin.findMany({ select: { id: true, email: true, name: true } });
 

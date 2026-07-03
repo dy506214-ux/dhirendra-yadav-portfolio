@@ -7,8 +7,14 @@ import { AnimatedHeading } from "@/components/ui/AnimatedHeading";
 import { TypingAnimation } from "@/components/ui/TypingAnimation";
 
 export default async function AboutSection() {
-  const profile = await prisma.profileInfo.findFirst();
-  const techSkills = await prisma.techSkill.findMany();
+  let profile = null;
+  let techSkills = [];
+  try {
+    profile = await prisma.profileInfo.findFirst();
+    techSkills = await prisma.techSkill.findMany();
+  } catch (error) {
+    console.error("AboutSection database query error:", error);
+  }
 
   return (
     <div id="about" className="max-w-6xl mx-auto px-6 pt-20 relative z-10 scroll-mt-20">

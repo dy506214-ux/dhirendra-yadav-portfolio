@@ -5,7 +5,12 @@ import { AnimatedHeading } from "@/components/ui/AnimatedHeading";
 import { TypingAnimation } from "@/components/ui/TypingAnimation";
 
 export default async function SkillsSection() {
-  const techSkills = await prisma.techSkill.findMany();
+  let techSkills: any[] = [];
+  try {
+    techSkills = await prisma.techSkill.findMany();
+  } catch (error) {
+    console.error("SkillsSection database query error:", error);
+  }
 
   const groupedSkills = techSkills.reduce((acc, skill) => {
     const category = skill.category || "Other";

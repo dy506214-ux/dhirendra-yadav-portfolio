@@ -5,6 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { revalidatePath } from "next/cache";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminStatsPage() {
   const stats = await prisma.stat.findMany();
 

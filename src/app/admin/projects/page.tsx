@@ -9,6 +9,8 @@ import { uploadToCloudinary } from "@/lib/cloudinary";
 import Link from "next/link";
 import { ClientForm } from "@/components/ClientForm";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({ orderBy: { id: 'desc' } });
 

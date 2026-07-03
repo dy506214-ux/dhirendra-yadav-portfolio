@@ -14,8 +14,15 @@ import CtaSection from "@/components/sections/CtaSection";
 export const revalidate = 60; // Revalidate every 60 seconds
 
 export default async function Page() {
-  const profileInfo = await prisma.profileInfo.findFirst();
-  const stats = await prisma.stat.findMany();
+  let profileInfo = null;
+  let stats: any[] = [];
+
+  try {
+    profileInfo = await prisma.profileInfo.findFirst();
+    stats = await prisma.stat.findMany();
+  } catch (error) {
+    console.error("Database query failed during build/render:", error);
+  }
 
   const data = {
     profile: profileInfo || {

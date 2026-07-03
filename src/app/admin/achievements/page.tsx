@@ -7,6 +7,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { revalidatePath } from "next/cache";
 import { ClientForm } from "@/components/ClientForm";
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminAchievementsPage() {
   const achievements = await prisma.achievement.findMany({ orderBy: { id: 'desc' } });
 
